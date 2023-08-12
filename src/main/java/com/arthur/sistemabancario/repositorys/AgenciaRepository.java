@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -17,17 +16,20 @@ public class AgenciaRepository {
     @Autowired
     private JsonFileService jsonFileService;
 
-    private final List<Cliente> clienteList = new ArrayList<>();
+    private List<Cliente> clienteList;
+
+    public void initializeData() throws IOException {
+        String pathLeitura = "classpath:data.json";
+        clienteList = jsonFileService.readJsonFile(pathLeitura);
+    }
 
     public List<Cliente> getAllClientes() throws IOException {
-        // String jsonFilePath = "classpath:data.json";
-        // clienteList = jsonFileService.readJsonFile(jsonFilePath);
-
+        String pathLeitura = "classpath:data.json";
+        clienteList = jsonFileService.readJsonFile(pathLeitura);
         return clienteList;
     }
 
     public Cliente save(Cliente c) throws IOException {
-        String jsonFilePath = "src/main/resources/data.json";
         Cliente cliente = new Cliente();
         cliente.createId();
         cliente.setNome(c.getNome());
@@ -37,7 +39,10 @@ public class AgenciaRepository {
         cliente.setConta(new Conta());
 
         clienteList.add(cliente);
-        // jsonFileService.writeJsonFile(clienteList, jsonFilePath);
+
+        String pathEscrita = "src/main/resources/data.json";
+        jsonFileService.writeJsonFile(clienteList, pathEscrita);
+
         return cliente;
     }
 
@@ -50,11 +55,14 @@ public class AgenciaRepository {
         return null;
     }
 
-    public void depositar(int id, int valor) {
+    public void depositar(int id, int valor) throws IOException {
         Cliente cliente = findById(id);
         Conta conta = cliente.getConta();
         Transacao t = new Transacao(valor);
         conta.addTransacao(t);
         conta.setSaldo(conta.getSaldo() + valor);
+
+        String pathEscrita = "src/main/resources/data.json";
+        jsonFileService.writeJsonFile(clienteList, pathEscrita);
     }
 }

@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "nome": "Arthr",
+        "cpf": "123123",
+        "phone": "21312",
+        "conta": {
+            "numero": 0,
+            "saldo": 0,
+            "dataDeCriacao": 1691877930658,
+            "transacaoList": []
+        }
+    },
+    {
+        "id": 0,
+        "nome": "Arthr",
+        "cpf": "123123",
+        "phone": "21312",
+        "conta": {
+            "numero": 2,
+            "saldo": 0,
+            "dataDeCriacao": 1691878606096,
+            "transacaoList": []
+        }
+    }
+]

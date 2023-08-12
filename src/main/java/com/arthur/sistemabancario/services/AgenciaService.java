@@ -13,19 +13,25 @@ public class AgenciaService {
     @Autowired
     private AgenciaRepository agenciaRepository;
 
-    public Cliente saveProduct(Cliente cliente) throws IOException {
+    public void initializeClientes() throws IOException {
+        agenciaRepository.initializeData();
+    }
+
+    public List<Cliente> getClientes() throws IOException {
+        return agenciaRepository.getAllClientes();
+    }
+
+    public Cliente saveCliente(Cliente cliente) throws IOException {
         return agenciaRepository.save(cliente);
     }
 
-    public List<Cliente> getProducts() throws IOException {
-        return agenciaRepository.getAllClientes();
-    }
+    
 
     public Cliente getClienteById(int id) {
         return agenciaRepository.findById(id);
     }
 
-    public void depositar(int id, int valor) {
+    public void depositar(int id, int valor) throws IOException {
         agenciaRepository.depositar(id, valor);
         return;
     }

@@ -3,11 +3,13 @@ package com.arthur.sistemabancario.controllers;
 import com.arthur.sistemabancario.model.Cliente;
 import com.arthur.sistemabancario.services.AgenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
 
+@Controller
 @RestController
 @RequestMapping("api/v1/clientes")
 public class AgenciaController {
@@ -15,15 +17,15 @@ public class AgenciaController {
     @Autowired
     private AgenciaService agenciaService;
 
-    @PostMapping
-    public Cliente addProduct(@RequestBody Cliente cliente) throws IOException {
-        return agenciaService.saveProduct(cliente);
+    @GetMapping
+    public List<Cliente> findAllClientes() throws IOException {
+         agenciaService.initializeClientes();
+         return agenciaService.getClientes();
     }
 
-    @GetMapping
-    public List<Cliente> findAllProducts() throws IOException {
-        // clienteService.initializeProducts();
-        return agenciaService.getProducts();
+    @PostMapping
+    public Cliente addCliente(@RequestBody Cliente cliente) throws IOException {
+        return agenciaService.saveCliente(cliente);
     }
 
     @GetMapping("{id}")
@@ -33,7 +35,7 @@ public class AgenciaController {
 
     @PostMapping("/depositar")
     @ResponseBody
-    public String depositar(@RequestParam String id, @RequestParam String valor) {
+    public String depositar(@RequestParam String id, @RequestParam String valor) throws IOException {
         agenciaService.depositar(Integer.parseInt(id), Integer.parseInt(valor));
         return "Depositado " + valor + " " +  "para " + id;
     }
