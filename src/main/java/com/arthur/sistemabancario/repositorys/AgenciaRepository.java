@@ -2,6 +2,7 @@ package com.arthur.sistemabancario.repositorys;
 
 import com.arthur.sistemabancario.model.Cliente;
 import com.arthur.sistemabancario.model.Conta;
+import com.arthur.sistemabancario.model.Transacao;
 import com.arthur.sistemabancario.services.JsonFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,8 +53,8 @@ public class AgenciaRepository {
     public void depositar(int id, int valor) {
         Cliente cliente = findById(id);
         Conta conta = cliente.getConta();
+        Transacao t = new Transacao(valor);
+        conta.addTransacao(t);
         conta.setSaldo(conta.getSaldo() + valor);
-
     }
-
 }
