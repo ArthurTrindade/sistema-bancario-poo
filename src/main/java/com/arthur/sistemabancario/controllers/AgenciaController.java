@@ -3,11 +3,7 @@ package com.arthur.sistemabancario.controllers;
 import com.arthur.sistemabancario.model.Cliente;
 import com.arthur.sistemabancario.services.AgenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,4 +25,18 @@ public class AgenciaController {
         // clienteService.initializeProducts();
         return agenciaService.getProducts();
     }
+
+    @GetMapping("{id}")
+    public Cliente findClienteById(@PathVariable int id) {
+        return agenciaService.getClienteById(id);
+    }
+
+    @PostMapping("/depositar")
+    @ResponseBody
+    public String depositar(@RequestParam String id, @RequestParam String valor) {
+        agenciaService.depositar(Integer.parseInt(id), Integer.parseInt(valor));
+        return "Depositado" + valor + " " +  "para " + id;
+    }
+
+
 }

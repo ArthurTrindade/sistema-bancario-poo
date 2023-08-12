@@ -21,4 +21,13 @@ public class AgenciaService {
         return agenciaRepository.getAllClientes();
     }
 
+    public Cliente getClienteById(int id) {
+        return agenciaRepository.findById(id);
+    }
+
+    public void depositar(int id, int valor) {
+        agenciaRepository.depositar(id, valor);
+        return;
+    }
+
 }
