@@ -2,19 +2,16 @@ package com.arthur.sistemabancario.model;
 
 import lombok.*;
 
-//@EqualsAndHashCode(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+import java.io.Serializable;
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Cliente extends Pessoa {
-    private static int total = 0;
-
+@NoArgsConstructor
+public class Cliente implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private long id;
+    private String nome;
+    private String cpf;
+    private String telefone;
     private Conta conta;
-
-    public void createId() {
-        setId(total);
-        total++;
-    }
-
 }

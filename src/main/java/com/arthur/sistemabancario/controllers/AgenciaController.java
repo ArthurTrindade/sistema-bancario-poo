@@ -4,41 +4,46 @@ import com.arthur.sistemabancario.model.Cliente;
 import com.arthur.sistemabancario.services.AgenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RestController
-@RequestMapping("api/v1/clientes")
 public class AgenciaController {
 
     @Autowired
     private AgenciaService agenciaService;
 
-    @GetMapping
-    public List<Cliente> findAllClientes() throws IOException {
-         agenciaService.initializeClientes();
-         return agenciaService.getClientes();
+    @GetMapping("/clients")
+    public String findAllClientes(Model model) throws IOException {
+        List<Cliente> clientes = agenciaService.getClientes();
+        model.addAttribute("clientes", clientes);
+        return "clients";
     }
 
-    @PostMapping
-    public Cliente addCliente(@RequestBody Cliente cliente) throws IOException {
-        return agenciaService.saveCliente(cliente);
+    @GetMapping("/add-client")
+    public String showAddClienteForm(Model model) {
+        Cliente cliente = new Cliente();
+        model.addAttribute("cliente", cliente);
+        return "add-client";
     }
 
-    @GetMapping("{id}")
-    public Cliente findClienteById(@PathVariable int id) {
-        return agenciaService.getClienteById(id);
+    @PostMapping("/add-client")
+    public String addCliente(Model model, @ModelAttribute("cliente") Cliente cliente) throws IOException {
+        agenciaService.saveCliente(cliente);
+        return "redirect:/clients";
     }
 
-    @PostMapping("/depositar")
-    @ResponseBody
+    @GetMapping("/deposit")
+    public String showDepositForm() {
+        return "deposit";
+    }
+
+    @PostMapping("/deposit")
     public String depositar(@RequestParam String id, @RequestParam String valor) throws IOException {
         agenciaService.depositar(Integer.parseInt(id), Integer.parseInt(valor));
-        return "Depositado " + valor + " " +  "para " + id;
+        return "redirect:/clients";
     }
-
-
 }

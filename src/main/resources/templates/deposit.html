@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Depositar</title>
+</head>
+<body>
+
+<h1>Depositar</h1>
+
+<form th:action="@{/deposit}" method="post">
+  <label for="id">ID do Cliente:</label>
+  <input type="text" id="id" name="id" required><br>
+
+  <label for="valor">Valor:</label>
+  <input type="text" id="valor" name="valor" required><br>
+
+  <button type="submit">Depositar</button>
+</form>
+
+</body>
+</html>

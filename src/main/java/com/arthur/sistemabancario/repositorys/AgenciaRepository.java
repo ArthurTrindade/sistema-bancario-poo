@@ -3,66 +3,83 @@ package com.arthur.sistemabancario.repositorys;
 import com.arthur.sistemabancario.model.Cliente;
 import com.arthur.sistemabancario.model.Conta;
 import com.arthur.sistemabancario.model.Transacao;
-import com.arthur.sistemabancario.services.JsonFileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class AgenciaRepository {
 
-    @Autowired
-    private JsonFileService jsonFileService;
-
-    private List<Cliente> clienteList;
-
-    public void initializeData() throws IOException {
-        String pathLeitura = "classpath:data.json";
-        clienteList = jsonFileService.readJsonFile(pathLeitura);
-    }
+    private final String path = "items.txt";
 
     public List<Cliente> getAllClientes() throws IOException {
-        String pathLeitura = "classpath:data.json";
-        clienteList = jsonFileService.readJsonFile(pathLeitura);
-        return clienteList;
+        return lerArquivo();
     }
 
     public Cliente save(Cliente c) throws IOException {
+
+        List<Cliente> list = getAllClientes();
+
         Cliente cliente = new Cliente();
-        cliente.createId();
+        Long proximoId = list.isEmpty() ? 1L : list.get(list.size() - 1).getId() + 1;
+
+        cliente.setId(proximoId);
         cliente.setNome(c.getNome());
         cliente.setCpf(c.getCpf());
-        cliente.setPhone(c.getPhone());
+        cliente.setTelefone(c.getTelefone());
 
-        cliente.setConta(new Conta());
+        Conta conta = new Conta();
+        cliente.setConta(conta);
 
-        clienteList.add(cliente);
+        list.add(cliente);
 
-        String pathEscrita = "src/main/resources/data.json";
-        jsonFileService.writeJsonFile(clienteList, pathEscrita);
+        escerverNoArquivo(list);
 
         return cliente;
     }
 
-    public Cliente findById(int id) {
-        for (Cliente i : clienteList) {
-            if (i.getId() == (id)) {
-                return i;
-            }
-        }
-        return null;
+    
+    public Cliente findById(int id) throws IOException {
+        return getAllClientes().stream()
+                .filter(item -> item.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     public void depositar(int id, int valor) throws IOException {
-        Cliente cliente = findById(id);
-        Conta conta = cliente.getConta();
-        Transacao t = new Transacao(valor);
-        conta.addTransacao(t);
-        conta.setSaldo(conta.getSaldo() + valor);
+        List<Cliente> list = getAllClientes();
 
-        String pathEscrita = "src/main/resources/data.json";
-        jsonFileService.writeJsonFile(clienteList, pathEscrita);
+        for (Cliente cliente : list) {
+            if (cliente.getId() == id) {
+                Conta conta = cliente.getConta();
+                Transacao t = new Transacao(valor);
+                conta.addTransacao(t);
+                conta.setSaldo(conta.getSaldo() + valor);
+                escerverNoArquivo(list);
+            }
+        }
     }
+
+    private List<Cliente> lerArquivo() {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path))) {
+            return (List<Cliente>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    private void escerverNoArquivo(List<Cliente> clienteList) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(path))) {
+            outputStream.writeObject(clienteList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
