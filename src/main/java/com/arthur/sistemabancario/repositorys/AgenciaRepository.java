@@ -44,6 +44,15 @@ public class AgenciaRepository {
         return cliente;
     }
 
+
+    public boolean deleteCliente(int id) throws IOException {
+        List<Cliente> clientes = getAllClientes();
+        boolean removed = clientes.removeIf(item -> item.getId() == (id));
+        if (removed) {
+            escerverNoArquivo(clientes);
+        }
+        return removed;
+    }
     
     public Cliente findById(int id) throws IOException {
         return getAllClientes().stream()

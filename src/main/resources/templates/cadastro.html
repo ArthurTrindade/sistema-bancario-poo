@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema Bancario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body class="">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 border bg-body-tertiary mt-5">
+                <h1 class="d-flex justify-content-center">Cadastro</h1>
+                <form th:action="@{/add-client}" method="post" th:object="${cliente}">
+                    <div class="mb-3 p-2">
+                        <!-- <label for="nome" class="form-label">Nome</label> -->
+                        <input th:field="*{nome}" type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
+                    </div>
+                    <div class="mb-3 p-2">
+                        <!-- <label for="cpf" class="form-label">CPF</label> -->
+                        <input th:field="*{cpf}" type="cpf" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+                    </div>
+                    <div class="mb-3 p-2">
+                        <!-- <label for="telefone" class="form-label">Telefone</label> -->
+                        <input th:field="*{telefone}" type="telefone" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required>
+                    </div>
+                    <div class="mb-3 p-2">
+                        <input type="submit" class="btn btn-primary" value="Registrar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

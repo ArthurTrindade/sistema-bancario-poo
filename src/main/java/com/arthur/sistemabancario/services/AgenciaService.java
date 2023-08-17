@@ -29,8 +29,14 @@ public class AgenciaService {
         return agenciaRepository.findById(id);
     }
 
+    public boolean deletarCliente(int id) throws IOException {
+        return agenciaRepository.deleteCliente(id);
+    }
+
     public void depositar(int id, int valor) throws IOException {
         agenciaRepository.depositar(id, valor);
     }
+
+
 
 }
