@@ -19,6 +19,11 @@ public class ApiAgenciaController {
     @Autowired
     private AgenciaService agenciaService;
 
+    
+    /** 
+     * @return List<Cliente>
+     * @throws IOException
+     */
     @GetMapping
     public List<Cliente> findAllClientes() throws IOException {
         return agenciaService.getClientes();
@@ -47,7 +52,7 @@ public class ApiAgenciaController {
     }
 
     @DeleteMapping("/clientes/{id}")
-    public ResponseEntity<Void> deleteItem(@PathVariable int id) throws IOException {
+    public ResponseEntity<Void> deleteCliente(@PathVariable int id) throws IOException {
         return agenciaService.deletarCliente(id)
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -11,29 +11,24 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class Conta implements Serializable {
-    private static int totalDeContas = 0;
-
-    private int id;
+    private static final long serialVersionUID = 1L;
+    private long id;
     private int numero;
     private int saldo;
     private Date dataDeCriacao;
     private List<Transacao> transacaoList;
 
     public Conta() {
-        this.numero = totalDeContas;
         this.saldo = 0;
         this.dataDeCriacao = new Date();
         this.transacaoList = new LinkedList<>();
-        totalDeContas++;
     }
 
+    /** 
+     * @param t
+     */
     public void addTransacao(Transacao t) {
         transacaoList.add(t);
     }
-
-    public void depositar(int valor) {
-        this.saldo += valor;
-    }
-
 
 }

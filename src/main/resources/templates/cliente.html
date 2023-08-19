@@ -45,19 +45,18 @@
                     </div>
                     <div class="card-footer text-center">
                         <h4 class="h4">Operações: </h4>
-                        <a th:href="@{/dashboard/deposito}" class="btn btn-success btn-lg rounded-4">Depositar</a>
-                        <a th:href="@{/dashboard/saque}" class="btn btn-danger btn-lg rounded-4">Sacar</a>
-                        <a href="#" class="btn btn-warning btn-lg rounded-3">Transferência</a>
+                        <a th:href="@{/deposito}" class="btn btn-success btn-lg rounded-4">Depositar</a>
+                        <a th:href="@{/saque}" class="btn btn-danger btn-lg rounded-4">Sacar</a>
+                        <a th:href="@{/transferencia}" class="btn btn-warning btn-lg rounded-3">Transferência</a>
                     </div>
 
                     <div class="card-footer text-center">
-                        <a href="#" class="btn btn-primary">Editar</a>
-                        <a href="#" class="btn btn-secondary">Sair</a>
-                        <a th:href="@{/dashboard/delete/{id}(id=${cliente.id})}" class="btn btn-outline-danger">Deletar</a>
+                        <a th:href="@{/login}" class="btn btn-secondary">Sair</a>
+                        <a th:href="@{/delete/{id}(id=${cliente.id})}" class="btn btn-outline-danger">Deletar</a>
                     </div>
                 </div>
 
-                <a th:href="@{/dashboard/clientes}" class="mt-2">Ver todos os clientes</a>
+                <a th:href="@{/clientes}" class="mt-2">Ver todos os clientes</a>
                 
             </div>
         </div>

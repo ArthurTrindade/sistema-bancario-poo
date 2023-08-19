@@ -11,7 +11,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Lista de Clientes</h1>
-        <a th:href="@{/dashboard/cadastro}" class="btn btn-secondary">Adicionar Cliente</a>
+        <a th:href="@{/cadastro}" class="btn btn-secondary">Adicionar Cliente</a>
 
         <div class="mt-4 row">
             <!-- Loop pelos itens aqui -->
@@ -24,7 +24,7 @@
                         <p class="card-text"><strong>Telefone:</strong> <span th:text="${cliente.telefone}"></span></p>
                         <p class="card-text"><strong>Saldo:</strong> R$ <span th:text="${cliente.conta.saldo}"></span>
                         </p>
-                        <a th:href="@{/dashboard/clientes/{id}(id=${cliente.id})}" th:text="Exibir" class="btn btn-primary">Detalhes</a>
+                        <a th:href="@{/clientes/{id}(id=${cliente.id})}" th:text="Exibir" class="btn btn-primary">Detalhes</a>
                     </div>
                 </div>
             </div>

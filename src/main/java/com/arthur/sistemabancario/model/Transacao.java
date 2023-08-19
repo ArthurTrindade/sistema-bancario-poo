@@ -5,15 +5,14 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-
 @Data
 public class Transacao implements Serializable {
-    private int id;
+    private static final long serialVersionUID = 1L;
+    private long id;
     private Date data;
     private int valor;
 
-    public Transacao(int id, Date data, int valor) {
-        this.id = id;
+    public Transacao(Date data, int valor) {
         this.data = data;
         this.valor = valor;
     }
@@ -26,5 +25,4 @@ public class Transacao implements Serializable {
         this.valor = valor;
     }
 
-    
 }
