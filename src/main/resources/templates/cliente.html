@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Cliente</title>
-    <!-- Adicione o link para o CSS do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -14,16 +13,15 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        Detalhes do Cliente
-                    </div>
+                    <h5 class="card-header bg-primary text-white">
+                        Bem-vindo
+                        <strong th:text="${cliente.nome}"></strong>
+                    </h5>
                     <div class="card-body">
-                        <!-- <p><strong>ID:</strong> </p> -->
-                        <p>ID: <strong th:text="${cliente.id}">asdf</strong></p>
-                        <p>Nome: <strong th:text="${cliente.nome}">asdf</strong></p>
-                        <p>CPF: <strong th:text="${cliente.cpf}">asdf</strong></p>
-                        <p>Telefone: <strong th:text="${cliente.telefone}">asdf</strong></p>
-                        <p>Saldo: <strong th:text="${cliente.conta.saldo}">asdf</strong></p>
+                        <p>ID: <strong th:text="${cliente.id}"></strong></p>
+                        <p>CPF: <strong th:text="${cliente.cpf}"></strong></p>
+                        <p>Telefone: <strong th:text="${cliente.telefone}"></strong></p>
+                        <p>Saldo: <strong th:text="${cliente.conta.saldo}"></strong></p>
 
                         <hr>
                         Transações:
@@ -46,15 +44,25 @@
                         </table>
                     </div>
                     <div class="card-footer text-center">
+                        <h4 class="h4">Operações: </h4>
+                        <a th:href="@{/dashboard/deposito}" class="btn btn-success btn-lg rounded-4">Depositar</a>
+                        <a th:href="@{/dashboard/saque}" class="btn btn-danger btn-lg rounded-4">Sacar</a>
+                        <a href="#" class="btn btn-warning btn-lg rounded-3">Transferência</a>
+                    </div>
+
+                    <div class="card-footer text-center">
                         <a href="#" class="btn btn-primary">Editar</a>
-                        <a href="#" class="btn btn-secondary ml-2">Voltar</a>
+                        <a href="#" class="btn btn-secondary">Sair</a>
+                        <a th:href="@{/dashboard/delete/{id}(id=${cliente.id})}" class="btn btn-outline-danger">Deletar</a>
                     </div>
                 </div>
+
+                <a th:href="@{/dashboard/clientes}" class="mt-2">Ver todos os clientes</a>
+                
             </div>
         </div>
     </div>
 
-    <!-- Adicione o link para o JS do Bootstrap no final do body -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

@@ -3,6 +3,8 @@ package com.arthur.sistemabancario.controllers;
 import com.arthur.sistemabancario.model.Cliente;
 import com.arthur.sistemabancario.services.AgenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,4 +45,12 @@ public class ApiAgenciaController {
     public Cliente login(@RequestBody Cliente cliente) throws IOException {
         return agenciaService.login(cliente);
     }
+
+    @DeleteMapping("/clientes/{id}")
+    public ResponseEntity<Void> deleteItem(@PathVariable int id) throws IOException {
+        return agenciaService.deletarCliente(id)
+                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 }

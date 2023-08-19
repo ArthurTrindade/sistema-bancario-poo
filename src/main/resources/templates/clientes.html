@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Itens</title>
-    <!-- Adicione o link para o CSS do Bootstrap -->
+    <title>Lista de Clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container mt-5">
-        <h1>Lista de Itens</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Loop pelos itens aqui -->
-                <tr th:each="cliente : ${clientes}">
-                    <td th:text="${cliente.id}"></td>
-                    <td th:text="${cliente.nome}"></td>
-                    <td th:text="${cliente.cpf}"></td>
-                    <td th:text="${cliente.telefone}"></td>
-                    <td th:text="${cliente.conta.saldo}"></td>
-                </tr>
-            </tbody>
-        </table>
-        <a href="#" class="btn btn-primary">Adicionar Item</a>
+        <h1 class="mb-4">Lista de Clientes</h1>
+        <a th:href="@{/dashboard/cadastro}" class="btn btn-secondary">Adicionar Cliente</a>
+
+        <div class="mt-4 row">
+            <!-- Loop pelos itens aqui -->
+            <div th:each="cliente : ${clientes}" class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-black" th:text="${cliente.nome}"></h5>
+                        <p class="card-text"><strong>ID:</strong> <span th:text="${cliente.id}"></span></p>
+                        <p class="card-text"><strong>CPF:</strong> <span th:text="${cliente.cpf}"></span></p>
+                        <p class="card-text"><strong>Telefone:</strong> <span th:text="${cliente.telefone}"></span></p>
+                        <p class="card-text"><strong>Saldo:</strong> R$ <span th:text="${cliente.conta.saldo}"></span>
+                        </p>
+                        <a th:href="@{/dashboard/clientes/{id}(id=${cliente.id})}" th:text="Exibir" class="btn btn-primary">Detalhes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Adicione o link para o JS do Bootstrap no final do body -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
-
-
-

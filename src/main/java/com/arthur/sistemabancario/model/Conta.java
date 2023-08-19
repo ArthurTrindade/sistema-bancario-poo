@@ -31,5 +31,9 @@ public class Conta implements Serializable {
         transacaoList.add(t);
     }
 
+    public void depositar(int valor) {
+        this.saldo += valor;
+    }
+
 
 }

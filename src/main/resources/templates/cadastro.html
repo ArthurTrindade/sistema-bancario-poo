@@ -14,22 +14,26 @@
         <div class="row justify-content-center">
             <div class="col-md-8 border bg-body-tertiary mt-5">
                 <h1 class="d-flex justify-content-center">Cadastro</h1>
-                <form th:action="@{/deposit}" method="POST">
+                <form th:object="${cliente}" method="POST">
                     <div class="mb-3 p-2">
-                        <!-- <label for="nome" class="form-label">Nome</label> -->
-                        <input th:field="*{nome}" type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
+                        <label for="nome" class="form-label">Nome</label>
+                        <input th:field="*{nome}" type="text" class="form-control" id="nome" name="nome"
+                            placeholder="Nome" required>
                     </div>
                     <div class="mb-3 p-2">
                         <!-- <label for="cpf" class="form-label">CPF</label> -->
-                        <input th:field="*{cpf}" type="cpf" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+                        <input th:field="*{cpf}" type="cpf" class="form-control" id="cpf" name="cpf" placeholder="CPF"
+                            required>
                     </div>
                     <div class="mb-3 p-2">
                         <!-- <label for="telefone" class="form-label">Telefone</label> -->
-                        <input th:field="*{telefone}" type="telefone" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required>
+                        <input th:field="*{telefone}" type="telefone" class="form-control" id="telefone" name="telefone"
+                            placeholder="Telefone" required>
                     </div>
                     <div class="mb-3 p-2">
                         <!-- <label for="telefone" class="form-label">Telefone</label> -->
-                        <input th:field="*{senha}" type="senha" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+                        <input th:field="*{senha}" type="senha" class="form-control" id="senha" name="senha"
+                            placeholder="Senha" required>
                     </div>
                     <div class="mb-3 p-2">
                         <input type="submit" class="btn btn-primary" value="Registrar">

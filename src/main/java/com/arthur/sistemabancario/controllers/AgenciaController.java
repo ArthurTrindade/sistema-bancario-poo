@@ -3,8 +3,6 @@ package com.arthur.sistemabancario.controllers;
 import com.arthur.sistemabancario.model.Cliente;
 import com.arthur.sistemabancario.services.AgenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,35 +39,51 @@ public class AgenciaController {
 
     @PostMapping("dashboard/cadastro")
     public String addCliente(Model model, @ModelAttribute("cliente") Cliente cliente) throws IOException {
-        Cliente c =  agenciaService.saveCliente(cliente);
+        Cliente c = agenciaService.saveCliente(cliente);
         model.addAttribute("cliente", cliente);
-        return "redirect:/clientes/" + String.valueOf(c.getId());
+        return "redirect:/dashboard/clientes/" + String.valueOf(c.getId());
     }
 
-    @GetMapping("dashboard/deposit")
+    @GetMapping("dashboard/deposito")
     public String showDepositForm() {
-        return "deposit";
+        return "deposito";
     }
 
-    @PostMapping("dashboard/deposit")
+    @PostMapping("dashboard/deposito")
     public String depositar(@RequestParam String id, @RequestParam String valor) throws IOException {
         agenciaService.depositar(Integer.parseInt(id), Integer.parseInt(valor));
-        return "redirect:/clientes/" + id;
+        return "redirect:/dashboard/clientes/" + id;
     }
 
-    @DeleteMapping("dashboard/clientes/{id}")
-    public ResponseEntity<Void> deleteItem(@PathVariable int id) throws IOException {
-        return agenciaService.deletarCliente(id)
-                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping("dashboard/saque")
+    public String showsaque() {
+        return "saque";
     }
 
+    @PostMapping("dashboard/saque")
+    public String sacar(@RequestParam String id, @RequestParam String valor) throws IOException {
+        agenciaService.sacar(Integer.parseInt(id), Integer.parseInt(valor));
+        return "redirect:/dashboard/clientes/" + id;
+    }
+
+    @GetMapping("/dashboard/delete/{id}")
+    public String deleteTutorial(Model model, @PathVariable int id) throws IOException {
+        Cliente cliente = agenciaService.getClienteById(id);
+        model.addAttribute("cliente", cliente);
+        return "delete";
+    }
+
+    @PostMapping("/dashboard/delete/{id}")
+    public String deletarCliente(@PathVariable int id) throws IOException {
+        agenciaService.deletarCliente(id);
+        return "redirect:/dashboard/clientes";
+    }
 
     @GetMapping("dashboard/login")
     public String mostraLoginCliente(Model model) {
         Cliente cliente = new Cliente();
         model.addAttribute("cliente", cliente);
-        return "login2";
+        return "login";
     }
 
     @PostMapping("dashboard/login")

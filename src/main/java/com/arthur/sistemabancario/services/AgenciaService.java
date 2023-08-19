@@ -35,6 +35,10 @@ public class AgenciaService {
         agenciaRepository.depositar(id, valor);
     }
 
+    public void sacar(int id, int valor) throws IOException {
+        agenciaRepository.sacar(id, valor);
+    }
+
     public Cliente login(Cliente c) throws IOException {
         return agenciaRepository.login(c);
     }

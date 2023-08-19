@@ -83,16 +83,33 @@ public class AgenciaRepository {
         }
     }
 
+    public void sacar(int id, int valor) throws IOException {
+        List<Cliente> list = getAllClientes();
+
+        for (Cliente cliente : list) {
+            if (cliente.getId() == id) {
+                Conta conta = cliente.getConta();
+                Transacao t = new Transacao(valor);
+                conta.addTransacao(t);
+                conta.setSaldo(conta.getSaldo() - valor);
+                escerverNoArquivo(list);
+            }
+        }
+    }
+
     public Cliente login(Cliente cliente) throws IOException {
         List<Cliente> list = getAllClientes();
-        
-        for (Cliente c : list) {
-            if (c.getCpf().equals(cliente.getCpf())) {
-                return c;
+        Cliente c = new Cliente();
+        for (Cliente i : list) {
+            if (i.getCpf().equals(cliente.getCpf())) {
+                c = i;
             }
         }
 
-    
+        if (cliente.getSenha().equals(c.getSenha())) {
+            return c;
+        }
+
         return null;
     }
 
