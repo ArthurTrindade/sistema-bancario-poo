@@ -14,26 +14,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  Classe AgenciaRepository: que faz as lógicas das operações com o banco de dados
+ * Classe AgenciaRepository: que faz as lógicas das operações com o banco de dados
  */
 @Repository
 public class AgenciaRepository {
 
     private final String path = "clientes.txt";
-    
-    /** 
-     * @return List<Cliente>
-     * @throws IOException
+
+    /**
+     * Gets all clientes.
+     *
+     * @return List<Cliente>  all clientes
+     * @throws IOException the io exception
      */
     public List<Cliente> getAllClientes() throws IOException {
         return lerArquivo();
     }
 
-    
-    /** 
-     * @param c
-     * @return Cliente
-     * @throws IOException
+
+    /**
+     * Save cliente.
+     *
+     * @param c the c
+     * @return Cliente cliente
+     * @throws IOException the io exception
      */
     public Cliente save(Cliente c) throws IOException {
 
@@ -59,10 +63,12 @@ public class AgenciaRepository {
         return cliente;
     }
 
-    /** 
-     * @param id
-     * @return boolean
-     * @throws IOException
+    /**
+     * Delete cliente boolean.
+     *
+     * @param id the id
+     * @return boolean boolean
+     * @throws IOException the io exception
      */
     public boolean deleteCliente(int id) throws IOException {
         List<Cliente> clientes = getAllClientes();
@@ -72,12 +78,14 @@ public class AgenciaRepository {
         }
         return removed;
     }
-    
-    
-    /** 
-     * @param id
-     * @return Cliente
-     * @throws IOException
+
+
+    /**
+     * Find by id cliente.
+     *
+     * @param id the id
+     * @return Cliente cliente
+     * @throws IOException the io exception
      */
     public Cliente findById(int id) throws IOException {
         return getAllClientes().stream()
@@ -88,9 +96,10 @@ public class AgenciaRepository {
 
     /**
      * Busca cliente por CPF
-     * @param cpf
-     * @return retorna o cliente 
-     * @throws IOException
+     *
+     * @param cpf the cpf
+     * @return retorna o cliente
+     * @throws IOException the io exception
      */
     public Cliente findByCpf(String cpf) throws IOException {
         return getAllClientes().stream()
@@ -101,9 +110,10 @@ public class AgenciaRepository {
 
     /**
      * Entrontra cliente por id e faz o deposito
-     * @param id
-     * @param valor
-     * @throws IOException
+     *
+     * @param id    the id
+     * @param valor the valor
+     * @throws IOException the io exception
      */
     public void depositar(int id, int valor) throws IOException {
         List<Cliente> list = getAllClientes();
@@ -124,9 +134,10 @@ public class AgenciaRepository {
 
     /**
      * Encontra cliente por id e faz o saque
-     * @param id
-     * @param valor
-     * @throws IOException
+     *
+     * @param id    the id
+     * @param valor the valor
+     * @throws IOException the io exception
      */
     public void sacar(int id, int valor) throws IOException {
         List<Cliente> list = getAllClientes();
@@ -147,10 +158,11 @@ public class AgenciaRepository {
 
     /**
      * Usa as funções de saque e deposito para fazer transferencia
-     * @param id1
-     * @param id2
-     * @param valor
-     * @throws IOException
+     *
+     * @param id1   the id 1
+     * @param id2   the id 2
+     * @param valor the valor
+     * @throws IOException the io exception
      */
     public void transferencia(int id1, int id2, int valor) throws IOException {
         sacar(id1, valor);
@@ -159,9 +171,10 @@ public class AgenciaRepository {
 
     /**
      * Verifica se o cliente está cadastrado e se a senha está correta
-     * @param cliente
-     * @return
-     * @throws IOException
+     *
+     * @param cliente the cliente
+     * @return cliente cliente
+     * @throws IOException the io exception
      */
     public Cliente login(Cliente cliente) throws IOException {
         List<Cliente> list = getAllClientes();

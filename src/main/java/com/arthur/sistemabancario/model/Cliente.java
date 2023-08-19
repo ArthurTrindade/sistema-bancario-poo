@@ -4,6 +4,9 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * The type Cliente.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Conta.
+ */
 @Data
 @AllArgsConstructor
 public class Conta implements Serializable {
@@ -18,14 +21,19 @@ public class Conta implements Serializable {
     private Date dataDeCriacao;
     private List<Transacao> transacaoList;
 
+    /**
+     * Instantiates a new Conta.
+     */
     public Conta() {
         this.saldo = 0;
         this.dataDeCriacao = new Date();
         this.transacaoList = new LinkedList<>();
     }
 
-    /** 
-     * @param t
+    /**
+     * Add transacao.
+     *
+     * @param t the t
      */
     public void addTransacao(Transacao t) {
         transacaoList.add(t);

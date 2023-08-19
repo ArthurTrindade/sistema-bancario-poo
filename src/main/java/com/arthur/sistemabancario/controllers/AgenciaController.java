@@ -19,15 +19,22 @@ public class AgenciaController {
     @Autowired
     private AgenciaService agenciaService;
 
+    /**
+     * Home string.
+     *
+     * @return the string
+     */
     @GetMapping()
     public String home() {
         return "redirect:/login";
     }
 
-    /** 
-     * @param model
-     * @return String
-     * @throws IOException
+    /**
+     * Find all clientes string.
+     *
+     * @param model the model
+     * @return String string
+     * @throws IOException the io exception
      */
     @GetMapping("/clientes")
     public String findAllClientes(Model model) throws IOException {
@@ -36,11 +43,13 @@ public class AgenciaController {
         return "clientes";
     }
 
-    /** 
-     * @param model
-     * @param id
-     * @return String
-     * @throws IOException
+    /**
+     * Gets cliente by id.
+     *
+     * @param model the model
+     * @param id    the id
+     * @return String cliente by id
+     * @throws IOException the io exception
      */
     @GetMapping("/clientes/{id}")
     public String getClienteById(Model model, @PathVariable int id) throws IOException {
@@ -51,9 +60,10 @@ public class AgenciaController {
 
 
     /**
-     *  Mostra a pagina de cadastro
-     * @param model
-     * @return
+     * Mostra a pagina de cadastro
+     *
+     * @param model the model
+     * @return string string
      */
     @GetMapping("/cadastro")
     public String mostraCadastro(Model model) {
@@ -64,10 +74,11 @@ public class AgenciaController {
 
     /**
      * Requisição que salva cliente no arquivo
-     * @param model
-     * @param cliente
-     * @return
-     * @throws IOException
+     *
+     * @param model   the model
+     * @param cliente the cliente
+     * @return string string
+     * @throws IOException the io exception
      */
     @PostMapping("/cadastro")
     public String cadastro(Model model, @ModelAttribute("cliente") Cliente cliente) throws IOException {
@@ -78,7 +89,8 @@ public class AgenciaController {
 
     /**
      * Mostra pagina de deposito
-     * @return
+     *
+     * @return string string
      */
     @GetMapping("/deposito")
     public String mostrarDeposito() {
@@ -87,10 +99,11 @@ public class AgenciaController {
 
     /**
      * Requisição para fazer deposito em um conta
-     * @param id
-     * @param valor
-     * @return
-     * @throws IOException
+     *
+     * @param id    the id
+     * @param valor the valor
+     * @return string string
+     * @throws IOException the io exception
      */
     @PostMapping("/deposito")
     public String depositar(@RequestParam String id, @RequestParam String valor) throws IOException {
@@ -100,7 +113,8 @@ public class AgenciaController {
 
     /**
      * Mostra pagina de saque
-     * @return
+     *
+     * @return string string
      */
     @GetMapping("/saque")
     public String mostraSaque() {
@@ -109,10 +123,11 @@ public class AgenciaController {
 
     /**
      * Requisição para realizar o saque
-     * @param id
-     * @param valor
-     * @return
-     * @throws IOException
+     *
+     * @param id    the id
+     * @param valor the valor
+     * @return string string
+     * @throws IOException the io exception
      */
     @PostMapping("/saque")
     public String sacar(@RequestParam String id, @RequestParam String valor) throws IOException {
@@ -120,13 +135,14 @@ public class AgenciaController {
         return "redirect:/clientes/" + id;
     }
 
-    
-    /** 
+
+    /**
      * Mostra pagina de delete com as informações do cliente
-     * @param model
-     * @param id
-     * @return String
-     * @throws IOException
+     *
+     * @param model the model
+     * @param id    the id
+     * @return String string
+     * @throws IOException the io exception
      */
     @GetMapping("/delete/{id}")
     public String deletarCliente(Model model, @PathVariable int id) throws IOException {
@@ -135,11 +151,13 @@ public class AgenciaController {
         return "delete";
     }
 
-    
-    /** 
-     * @param id
-     * @return String
-     * @throws IOException
+
+    /**
+     * Deletar cliente string.
+     *
+     * @param id the id
+     * @return String string
+     * @throws IOException the io exception
      */
     @PostMapping("/delete/{id}")
     public String deletarCliente(@PathVariable int id) throws IOException {
@@ -149,8 +167,9 @@ public class AgenciaController {
 
     /**
      * Pagina para login
-     * @param model
-     * @return
+     *
+     * @param model the model
+     * @return string string
      */
     @GetMapping("/login")
     public String mostraLoginCliente(Model model) {
@@ -158,13 +177,14 @@ public class AgenciaController {
         model.addAttribute("cliente", cliente);
         return "login";
     }
-    
+
     /**
-     * 
-     * @param model
-     * @param cliente
-     * @return
-     * @throws IOException
+     * Login cliente string.
+     *
+     * @param model   the model
+     * @param cliente the cliente
+     * @return string string
+     * @throws IOException the io exception
      */
     @PostMapping("/login")
     public String loginCliente(Model model, @ModelAttribute("cliente") Cliente cliente) throws IOException {
@@ -175,7 +195,8 @@ public class AgenciaController {
 
     /**
      * Mostra pagina de transferencia
-     * @return
+     *
+     * @return string string
      */
     @GetMapping("/transferencia")
     public String mostraTransferencia() {
@@ -184,11 +205,12 @@ public class AgenciaController {
 
     /**
      * Requisição para realizar transferencia
-     * @param id1
-     * @param id2
-     * @param valor
-     * @return
-     * @throws IOException
+     *
+     * @param id1   the id 1
+     * @param id2   the id 2
+     * @param valor the valor
+     * @return string string
+     * @throws IOException the io exception
      */
     @PostMapping("/transferencia")
     public String transferir(@RequestParam String id1, @RequestParam String id2,  @RequestParam String valor) throws IOException {
