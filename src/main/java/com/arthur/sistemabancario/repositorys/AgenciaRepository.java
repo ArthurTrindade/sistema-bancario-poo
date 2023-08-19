@@ -92,10 +92,7 @@ public class AgenciaRepository {
             }
         }
 
-        // if (cliente == null || cliente.getSenha().equals(c.getSenha())) {
-        //     // excessão
-        // }
-
+    
         return null;
     }
 

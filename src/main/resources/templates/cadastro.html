@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 border bg-body-tertiary mt-5">
                 <h1 class="d-flex justify-content-center">Cadastro</h1>
-                <form th:object="${cliente}" method="POST">
+                <form th:action="@{/deposit}" method="POST">
                     <div class="mb-3 p-2">
                         <!-- <label for="nome" class="form-label">Nome</label> -->
                         <input th:field="*{nome}" type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>

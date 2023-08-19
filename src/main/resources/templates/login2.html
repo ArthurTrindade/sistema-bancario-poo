@@ -15,14 +15,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8 border bg-body-tertiary mt-5">
                 <h1>Login</h1>
-                <form action="login.php" method="post">
+                <form method="post">
                     <div class="mb-3">
-                        <label for="username" class="form-label">Usuário</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+                        <label for="cpf" class="form-label">CPF</label>
+                        <input type="text" class="form-control" id="cpf" name="cpf" required>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label for="senha" class="form-label">Senha</label>
+                        <input type="text" class="form-control" id="senha" name="senha" required>
                     </div>
                     <div class="mb-3">
                         <input type="submit" class="btn btn-primary" value="Login">
@@ -31,7 +31,7 @@
                         <a href="">Esqueceu sua senha?</a>
                     </div>
                     <div class="mb-3">
-                        <a th:href="@{/add-client}">Faça seu cadastro</a>
+                        <a th:href="@{/cadastro}">Faça seu cadastro</a>
                     </div>
                 </form>
             </div>

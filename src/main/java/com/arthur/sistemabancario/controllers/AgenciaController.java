@@ -63,4 +63,21 @@ public class AgenciaController {
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
+    @GetMapping("dashboard/login")
+    public String mostraLoginCliente(Model model) {
+        Cliente cliente = new Cliente();
+        model.addAttribute("cliente", cliente);
+        return "login2";
+    }
+
+    @PostMapping("dashboard/login")
+    public String loginCliente(Model model, @ModelAttribute("cliente") Cliente cliente) throws IOException {
+        Cliente c = agenciaService.login(cliente);
+        System.out.println(c);
+        model.addAttribute("cliente", c);
+        return "redirect:/dashboard/clientes/" + String.valueOf(c.getId());
+    }
+
 }
