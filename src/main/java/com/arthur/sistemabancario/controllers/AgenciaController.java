@@ -12,52 +12,52 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@Controller
+@Controller()
 public class AgenciaController {
 
     @Autowired
     private AgenciaService agenciaService;
 
-    @GetMapping("/clientes")
+    @GetMapping("dashboard/clientes")
     public String findAllClientes(Model model) throws IOException {
         List<Cliente> clientes = agenciaService.getClientes();
         model.addAttribute("clientes", clientes);
         return "clientes";
     }
 
-    @GetMapping("clientes/{id}")
-    public ResponseEntity<Cliente> getClienteById(@PathVariable int id) throws IOException {
-        Cliente item = agenciaService.getClienteById(id);
-        return item != null
-                ? new ResponseEntity<>(item, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping("dashboard/clientes/{id}")
+    public String getClienteById(Model model, @PathVariable int id) throws IOException {
+        Cliente cliente = agenciaService.getClienteById(id);
+        model.addAttribute("cliente", cliente);
+        return "cliente";
     }
 
-    @GetMapping("/cadastro")
+    @GetMapping("dashboard/cadastro")
     public String showAddClienteForm(Model model) {
         Cliente cliente = new Cliente();
         model.addAttribute("cliente", cliente);
         return "cadastro";
     }
 
-    @PostMapping("/add-client")
+    @PostMapping("dashboard/cadastro")
     public String addCliente(Model model, @ModelAttribute("cliente") Cliente cliente) throws IOException {
-        agenciaService.saveCliente(cliente);
-        return "redirect:/clients";
+        Cliente c =  agenciaService.saveCliente(cliente);
+        model.addAttribute("cliente", cliente);
+        return "redirect:/clientes/" + String.valueOf(c.getId());
     }
 
-    @GetMapping("/deposit")
+    @GetMapping("dashboard/deposit")
     public String showDepositForm() {
         return "deposit";
     }
 
-    @PostMapping("/deposit")
+    @PostMapping("dashboard/deposit")
     public String depositar(@RequestParam String id, @RequestParam String valor) throws IOException {
         agenciaService.depositar(Integer.parseInt(id), Integer.parseInt(valor));
-        return "redirect:/clientes";
+        return "redirect:/clientes/" + id;
     }
 
-    @DeleteMapping("clientes/{id}")
+    @DeleteMapping("dashboard/clientes/{id}")
     public ResponseEntity<Void> deleteItem(@PathVariable int id) throws IOException {
         return agenciaService.deletarCliente(id)
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT)

@@ -3,6 +3,7 @@ package com.arthur.sistemabancario.services;
 import com.arthur.sistemabancario.model.Cliente;
 import com.arthur.sistemabancario.repositorys.AgenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.CodeFlow.ClinitAdder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,10 +14,7 @@ public class AgenciaService {
     @Autowired
     private AgenciaRepository agenciaRepository;
 
-    // public void initializeClientes() throws IOException {
-    //     agenciaRepository.initializeData();
-    // }
-
+   
     public List<Cliente> getClientes() throws IOException {
         return agenciaRepository.getAllClientes();
     }
@@ -37,6 +35,7 @@ public class AgenciaService {
         agenciaRepository.depositar(id, valor);
     }
 
-
-
+    public Cliente login(Cliente c) throws IOException {
+        return agenciaRepository.login(c);
+    }
 }

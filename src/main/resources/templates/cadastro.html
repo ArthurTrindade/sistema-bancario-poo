@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 border bg-body-tertiary mt-5">
                 <h1 class="d-flex justify-content-center">Cadastro</h1>
-                <form th:action="@{/add-client}" method="post" th:object="${cliente}">
+                <form th:object="${cliente}" method="POST">
                     <div class="mb-3 p-2">
                         <!-- <label for="nome" class="form-label">Nome</label> -->
                         <input th:field="*{nome}" type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
@@ -26,6 +26,10 @@
                     <div class="mb-3 p-2">
                         <!-- <label for="telefone" class="form-label">Telefone</label> -->
                         <input th:field="*{telefone}" type="telefone" class="form-control" id="telefone" name="telefone" placeholder="Telefone" required>
+                    </div>
+                    <div class="mb-3 p-2">
+                        <!-- <label for="telefone" class="form-label">Telefone</label> -->
+                        <input th:field="*{senha}" type="senha" class="form-control" id="senha" name="senha" placeholder="Senha" required>
                     </div>
                     <div class="mb-3 p-2">
                         <input type="submit" class="btn btn-primary" value="Registrar">

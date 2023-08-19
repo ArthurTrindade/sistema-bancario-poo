@@ -24,7 +24,6 @@ public class ApiAgenciaController {
 
     @PostMapping
     public Cliente addCliente(@RequestBody Cliente cliente) throws IOException {
-        // agenciaService.initializeClientes();
         return agenciaService.saveCliente(cliente);
     }
 
@@ -38,5 +37,10 @@ public class ApiAgenciaController {
     public String depositar(@RequestParam String id, @RequestParam String valor) throws IOException {
         agenciaService.depositar(Integer.parseInt(id), Integer.parseInt(valor));
         return "Depositado " + valor + " " +  "para " + id;
+    }
+
+    @PostMapping("/login")
+    public Cliente login(@RequestBody Cliente cliente) throws IOException {
+        return agenciaService.login(cliente);
     }
 }

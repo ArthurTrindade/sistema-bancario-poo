@@ -33,7 +33,8 @@ public class AgenciaRepository {
         cliente.setNome(c.getNome());
         cliente.setCpf(c.getCpf());
         cliente.setTelefone(c.getTelefone());
-
+        cliente.setSenha(c.getSenha());
+        
         Conta conta = new Conta();
         cliente.setConta(conta);
 
@@ -61,6 +62,13 @@ public class AgenciaRepository {
                 .orElse(null);
     }
 
+    public Cliente findByCpf(String cpf) throws IOException {
+        return getAllClientes().stream()
+                .filter(c -> c.getCpf() == cpf)
+                .findFirst()
+                .orElse(null);
+    }
+
     public void depositar(int id, int valor) throws IOException {
         List<Cliente> list = getAllClientes();
 
@@ -73,6 +81,22 @@ public class AgenciaRepository {
                 escerverNoArquivo(list);
             }
         }
+    }
+
+    public Cliente login(Cliente cliente) throws IOException {
+        List<Cliente> list = getAllClientes();
+        
+        for (Cliente c : list) {
+            if (c.getCpf().equals(cliente.getCpf())) {
+                return c;
+            }
+        }
+
+        // if (cliente == null || cliente.getSenha().equals(c.getSenha())) {
+        //     // excessão
+        // }
+
+        return null;
     }
 
     private List<Cliente> lerArquivo() {
